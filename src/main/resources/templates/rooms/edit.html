@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<head th:insert="fragments/general.html :: head">
+    <title>Text-based adventure game editor - Edit room</title>
 </head>
 <body>
+    <div class="container">
     
-    <h1 th:if="${room.id == 0}">Create new room</h1>
-    <h1 th:unless="${room.id == 0}">Update room #<span th:text="${room.id}"></span></h1>
+        <h1 th:if="${room.id == 0}" class="mb-4">Create new room</h1>
+        <h1 th:unless="${room.id == 0}" class="mb-4">Update room #<span th:text="${room.id}"></span></h1>
 
-    <form method="post">
-        <label for="name">Name</label>
-        <input type="text" name="name" th:value="${room.name}" />
+        <form class="mb-3" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" th:value="${room.name}" />
+            </div>
 
-        <label for="description">Description</label>
-        <input type="text" name="description" th:value="${room.description}" />
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" name="description" th:value="${room.description}" />
+            </div>
 
-        <button type="submit">Submit</button>
-    </form>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a th:if="${room.id == 0}" class="btn btn-secondary" href="/rooms">Back to list</a>
+                <a th:unless="${room.id == 0}" class="btn btn-secondary" th:href="@{/rooms/{id}(id=${room.id})}">Back to details</a>
+            </div>
+        </form>
 
+    </div>
 </body>
 </html>

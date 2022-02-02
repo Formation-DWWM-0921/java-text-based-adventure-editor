@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<head th:insert="fragments/general.html :: head">
+    <title>Text-based adventure game editor - Room details</title>
 </head>
 <body>
-    <h1>Room #<span th:text="${room.id}"></span></h1>
+    <div class="container">
+        <h1 class="mb-4">Room #<span th:text="${room.id}"></span></h1>
 
-    <ul>
-        <li>Name: <span th:text="${room.name}"></span></li>
-        <li>Description: <span th:text="${room.description}"></span></li>
-    </ul>
+        <ul class="list-group mb-3">
+            <li class="list-group-item">
+                <strong>Name:</strong> <span th:text="${room.name}"></span>
+            </li>
+            <li class="list-group-item">
+                <strong>Description:</strong> <span th:text="${room.description}"></span>
+            </li>
+        </ul>
 
-    <a th:href="@{/rooms/{id}/update(id=${room.id})}">Edit</a>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-primary" th:href="@{/rooms/{id}/update(id=${room.id})}">Edit</a>
 
-    <form th:action="@{/rooms/{id}/delete(id=${room.id})}" method="post">
-        <button type="submit">Delete</button>
-    </form>
+            <form th:action="@{/rooms/{id}/delete(id=${room.id})}" method="post">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
 
-    <a href="/rooms">Back to list</a>
+            <a class="btn btn-secondary" href="/rooms">Back to list</a>
+        </div>
+    </div>
 </body>
 </html>
