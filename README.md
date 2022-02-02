@@ -1,10 +1,10 @@
-# Jeu d»aventure texte - l'éditeur
+# Jeu d'aventure texte - l'éditeur
 
 Le but de ce projet est de créer une application permettant de modifier les contenus de notre jeu d'aventure texte en ligne de commandes.
 
 ## Mission 1 - Gérer les lieux
 
-1. Créer/modifier/supprimer des lieux
+### 1. Créer/modifier/supprimer des lieux
 
 Dans une classe `RoomController`, implémenter les méthodes permettant d'obtenir les routes suivantes:
 
@@ -18,7 +18,7 @@ Dans une classe `RoomController`, implémenter les méthodes permettant d'obteni
 | `POST` | `/rooms/{id}/edit` | Modifie un lieu existant en fonction de son identifiant en base de données à partir des informations fournies dans le formulaire. |
 | `POST` | `/rooms/{id}/delete` | Supprime un lieu existant en fonction de son identifiant en base de données. |
 
-2. Créer/modifier/supprimer des éléments interactifs
+### 2. Créer/modifier/supprimer des éléments interactifs
 
 Dans une classe `ItemController`, implémenter les méthodes permettant d'obtenir les routes suivantes:
 
@@ -32,6 +32,6 @@ Dans une classe `ItemController`, implémenter les méthodes permettant d'obteni
 | `POST` | `/items/{id}/edit` | Modifie un élément interactif existant en fonction de son identifiant en base de données à partir des informations fournies dans le formulaire. |
 | `POST` | `/items/{id}/delete` | Supprime un élément interactif existant en fonction de son identifiant en base de données. |
 
-## BONUS
+### BONUS
 
 - La page permettant d'afficher les détails d'un lieu doit également afficher la liste des éléments interactifs qui s'y trouvent, et permettre d'accéder directement à chaque élément de manière individuelle.

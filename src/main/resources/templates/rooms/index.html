@@ -10,7 +10,11 @@
     <h1>All rooms</h1>
 
     <ul>
-        <li th:each="room : ${rooms}" th:text="${room.name}"></li>
+        <li th:each="room : ${rooms}">
+            <a th:href="@{/rooms/{id}(id=${room.id})}" th:text="${room.name}"></a>
+        </li>
     </ul>
+
+    <a href="/rooms/create">Create new room</a>
 </body>
 </html>

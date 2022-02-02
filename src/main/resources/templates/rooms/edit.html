@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 th:if="${room.id == 0}">Create new room</h1>
+    <h1 th:unless="${room.id == 0}">Update room #<span th:text="${room.id}"></span></h1>
+
+    <form method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" th:value="${room.name}" />
+
+        <label for="description">Description</label>
+        <input type="text" name="description" th:value="${room.description}" />
+
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

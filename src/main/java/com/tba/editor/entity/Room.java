@@ -71,11 +71,29 @@ public class Room
     }
 
     /**
+     * Modifie le nom du lieu
+     * @param name Le nouveau nom du lieu
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
      * @return La description du lieu
      */
     public String getDescription()
     {
         return description;
+    }
+
+    /**
+     * Modifie la description du lieu
+     * @param name La nouvelle description du lieu
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
     
     /**
