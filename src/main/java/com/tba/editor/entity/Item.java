@@ -67,6 +67,15 @@ public class Item
     }
 
     /**
+     * Modifie le lieu dans lequel se trouve l'élément interactif
+     * @param room Le nouveau lieu
+     */
+    public void setRoom(Room room)
+    {
+        this.room = room;
+    }
+
+    /**
      * @return Le nom de l'élément interactif
      */
     public String getName() {
@@ -74,9 +83,27 @@ public class Item
     }
 
     /**
+     * Modifie le nom de l'élément interactif
+     * @param name Le nouveau nom
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
      * @return L'élément interactif est-il visible et utilisable?
      */
     public boolean isVisible() {
         return visible;
+    }
+
+    /**
+     * Modifie la visibilité de l'élément interactif
+     * @param visible La nouvelle visibilité
+     */
+    public void setVisible(boolean visible)
+    {
+        this.visible = visible;
     }
 }

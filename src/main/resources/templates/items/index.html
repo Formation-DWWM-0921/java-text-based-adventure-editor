@@ -1,50 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:insert="fragments/general.html :: head">
-    <title>Text-based adventure game editor - Room details</title>
+    <title>Text-based adventure game editor - All items</title>
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Room #<span th:text="${room.id}"></span></h1>
+        <h1 class="mb-4">All items</h1>
 
-        <ul class="list-group mb-3">
-            <li class="list-group-item">
-                <strong>Name:</strong> <span th:text="${room.name}"></span>
-            </li>
-            <li class="list-group-item">
-                <strong>Description:</strong> <span th:text="${room.description}"></span>
-            </li>
-        </ul>
-
-        <div class="btn-group mb-4" role="group" aria-label="Basic example">
-            <a class="btn btn-primary" th:href="@{/rooms/{id}/update(id=${room.id})}">Edit</a>
-
-            <form th:action="@{/rooms/{id}/delete(id=${room.id})}" method="post">
-                <button class="btn btn-danger" type="submit">Delete</button>
-            </form>
-
-            <a class="btn btn-secondary" href="/rooms">Back to list</a>
-        </div>
-
-        <h2 class="mb-3">Items present in this room</h2>
         <table class="table table-striped table-hover mb-3">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Visible</th>
+                    <th scope="col">Room</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="item : ${room.items}">
+                <tr th:each="item : ${items}">
                     <th scope="row" th:text="${item.id}"></th>
                     <td>
                         <a th:href="@{/items/{id}(id=${item.id})}" th:text="${item.name}"></a>
                     </td>
                     <td th:if="${item.visible}">Yes</td>
                     <td th:unless="${item.visible}">No</td>
+                    <td>
+                        <a th:href="@{/rooms/{id}(id=${item.room.id})}" th:text="${item.room.name}"></a>
+                    </td>
                     <td>
                         <a class="btn btn-sm btn-primary" th:href="@{/items/{id}/update(id=${item.id})}">Edit</a>
                     </td>

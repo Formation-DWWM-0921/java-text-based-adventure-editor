@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/general.html :: head">
+    <title>Text-based adventure game editor - Item details</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Item #<span th:text="${item.id}"></span></h1>
+
+        <ul class="list-group mb-3">
+            <li class="list-group-item">
+                <strong>Name:</strong> <span th:text="${item.name}"></span>
+            </li>
+            <li class="list-group-item">
+                <strong>Visible:</strong> <span th:if="${item.visible}">Yes</span><span th:unless="${item.visible}">No</span>
+            </li>
+            <li class="list-group-item">
+                <strong>Room:</strong> <a th:href="@{/rooms/{id}(id=${item.room.id})}" th:text="${item.room.name}"></a>
+            </li>
+        </ul>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-primary" th:href="@{/items/{id}/update(id=${item.id})}">Edit</a>
+
+            <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+
+            <a class="btn btn-secondary" href="/items">Back to list</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/general.html :: head">
+    <title>Text-based adventure game editor - Edit item</title>
+</head>
+<body>
+    <div class="container">
+    
+        <h1 th:if="${item.id == 0}" class="mb-4">Create new item</h1>
+        <h1 th:unless="${item.id == 0}" class="mb-4">Update item #<span th:text="${item.id}"></span></h1>
+
+        <form class="mb-3" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" th:value="${item.name}" />
+            </div>
+
+            <div class="mb-3">
+                <label for="roomId" class="form-label">Room</label>
+                <select class="form-select" name="roomId" aria-label="Default select example">
+                    <option th:each="room : ${rooms}" th:text="${room.name}" th:value="${room.id}" th:selected="${item.room.id == room.id}"></option>
+                </select>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" name="visible" type="checkbox" id="visible" th:checked="${item.visible}">
+                <label class="form-check-label" for="visible">
+                    Visible
+                </label>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a th:if="${item.id == 0}" class="btn btn-secondary" href="/items">Back to list</a>
+                <a th:unless="${item.id == 0}" class="btn btn-secondary" th:href="@{/items/{id}(id=${item.id})}">Back to details</a>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
