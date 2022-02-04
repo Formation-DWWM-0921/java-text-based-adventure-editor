@@ -28,6 +28,36 @@
             <a class="btn btn-secondary" href="/rooms">Back to list</a>
         </div>
 
+        <h2 class="mb-3">Connections to other rooms</h2>
+        <table class="table table-striped table-hover mb-3">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Direction</th>
+                    <th scope="col">Room</th>
+                    <th scope="col">Submit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="connection : ${connections}">
+                    <form method="post" th:action="@{/rooms/{id}/connect(id=${room.id})}">
+                        <td>
+                            <a href="" th:text="${connection.direction.name}"></a>
+                            <input name="directionId" type="hidden" th:value="${connection.direction.id}" />
+                        </td>
+                        <td>
+                            <select name="toRoomId" class="form-select form-select-sm">
+                                <option value="0">-</option>
+                                <option th:value="${selectableRoom.id}" th:each="selectableRoom : ${rooms}" th:text="${selectableRoom.name}" th:selected="${selectableRoom == connection.toRoom}"></option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+
         <h2 class="mb-3">Items present in this room</h2>
         <table class="table table-striped table-hover mb-3">
             <thead class="table-dark">

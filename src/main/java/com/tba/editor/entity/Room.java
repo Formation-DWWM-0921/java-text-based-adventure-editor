@@ -103,4 +103,20 @@ public class Room
     {
         return items;
     }
+
+    /**
+     * @return La liste de tous les passages qui prennent ce lieu comme lieu de départ
+     */
+    public List<RoomConnection> getConnectionsFrom()
+    {
+        return connectionsFrom;
+    }
+
+    /**
+     * @return La liste de tous les passages qui prennent ce lieu comme lieu d'arrivée
+     */
+    public List<RoomConnection> getConnectionsTo()
+    {
+        return connectionsTo;
+    }
 }

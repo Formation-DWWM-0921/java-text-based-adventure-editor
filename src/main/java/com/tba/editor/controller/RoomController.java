@@ -1,6 +1,13 @@
 package com.tba.editor.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tba.editor.entity.Room;
+import com.tba.editor.entity.RoomConnection;
+import com.tba.editor.entity.command.DirectionCommand;
+import com.tba.editor.repository.DirectionCommandRepository;
+import com.tba.editor.repository.RoomConnectionRepository;
 import com.tba.editor.repository.RoomRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +35,10 @@ public class RoomController
      */
     @Autowired
     private RoomRepository repository;
+    @Autowired
+    private DirectionCommandRepository directionRepository;
+    @Autowired
+    private RoomConnectionRepository connectionRepository;
 
     /**
      * Afficher tous les éléments
@@ -59,6 +70,21 @@ public class RoomController
         );
         // Ajoute l'élément demandé aux variables accessibles par la vue
         model.addAttribute("room", room);
+        model.addAttribute("rooms", repository.findAll());
+        // Construit une liste de passages pour toutes les directions existantes
+        List<RoomConnection> connections = new ArrayList<>();
+        for (DirectionCommand direction : directionRepository.findAll()) {
+            // Cherche un passage prenant ce lieu comme lieu de départ et cette direction
+            RoomConnection connection = connectionRepository.findByFromRoomAndDirection(room, direction);
+            // Si ce passage n'existe pas, crée un passage vide à la place
+            if (connection == null) {
+                connection = new RoomConnection();
+                connection.setDirection(direction);
+            }
+            // Ajoute le passage à la liste
+            connections.add(connection);
+        }
+        model.addAttribute("connections", connections);
         // Renvoie le nom du template à partir duquel construire la page HTML
         return "rooms/details";
     }
@@ -163,5 +189,50 @@ public class RoomController
         attributes.addFlashAttribute("message", "Room succesfully deleted!");
         // Redirige vers la page listant tous les éléments existants
         return new RedirectView("/rooms");
+    }
+
+    // Modifie un passage partant d'un lieu
+    @PostMapping("/{id}/connect")
+    public RedirectView connect(@PathVariable int id, @RequestParam int directionId, @RequestParam int toRoomId)
+    {
+        // Récupère le lieu de départ en base de données
+        Room fromRoom = repository.findById(id).orElseThrow(
+            // Si l'élément n'existe pas, génère une erreur 404
+            () -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Room #" + id + " does not exist."); }
+        );
+        // Récupère la direction en base de données
+        DirectionCommand direction = directionRepository.findById(directionId).orElseThrow(
+            // Si l'élément n'existe pas, génère une erreur 404
+            () -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Room #" + id + " does not exist."); }
+        );
+        // Cherche un passage prenant ce lieu comme lieu de départ et cette direction
+        RoomConnection connection = connectionRepository.findByFromRoomAndDirection(fromRoom, direction);
+        
+        // S'il s'agit de retirer un passage
+        if (toRoomId == 0) {
+            // Si le passage existe, le supprime de la base de données
+            if (connection != null) {
+                connectionRepository.delete(connection);
+            }
+        // Sinon, il s'agit d'ajouter ou de modifier un passage
+        } else {
+            // Récupère le lieu d'arrivée en base de données
+            Room toRoom = repository.findById(toRoomId).orElseThrow(
+                // Si l'élément n'existe pas, génère une erreur 404
+                () -> { throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Room #" + id + " does not exist."); }
+            );
+            // Si ce passage n'existe pas, crée un nouveau passage
+            if (connection == null) {
+                connection = new RoomConnection();
+                connection.setFromRoom(fromRoom);
+                connection.setDirection(direction);
+            }
+            // Change le lieu d'arrivéè du passage
+            connection.setToRoom(toRoom);
+            // Sauvegarde le passage en base de données
+            connectionRepository.save(connection);
+        }
+        // Redirige vers la page de détails du nouveau lieu
+        return new RedirectView("/rooms/" + id);
     }
 }

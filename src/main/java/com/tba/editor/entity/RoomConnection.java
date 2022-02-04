@@ -58,6 +58,14 @@ public class RoomConnection
     public Room getFromRoom() {
         return fromRoom;
     }
+
+    /**
+     * Modifie le lieu de départ
+     * @param room Le nouveau lieu de départ
+     */
+    public void setFromRoom(Room room) {
+        this.fromRoom = room;
+    }
     
     /**
      * @return Le lieu d'arrivée
@@ -65,11 +73,27 @@ public class RoomConnection
     public Room getToRoom() {
         return toRoom;
     }
+
+    /**
+     * Modifie le lieu d'arrivée
+     * @param room Le nouveau lieu d'arrivée
+     */
+    public void setToRoom(Room room) {
+        this.toRoom = room;
+    }
     
     /**
      * @return La direction à emprunter
      */
     public DirectionCommand getDirection() {
         return direction;
+    }
+
+    /**
+     * Modifie la direction à emprunter
+     * @param direction La nouvelle direction à emprunter
+     */
+    public void setDirection(DirectionCommand direction) {
+        this.direction = direction;
     }
 }
