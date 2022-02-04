@@ -145,10 +145,10 @@ CREATE TABLE `effect` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `effect` (`id`, `dtype`, `command_id`, `item_id`, `message`, `target_room_id`) VALUES
-(1,	'Message',	1,	1,	'You take a quick nap. You feel refreshed!',	NULL),
-(2,	'Message',	2,	3,	'You open the curtains and take a look outside.',	NULL),
-(3,	'ChangeRoom',	1,	9,	NULL,	4),
-(4,	'ChangeRoom',	1,	8,	NULL,	1),
-(5,	'Message',	1,	9,	'You call the lift.',	NULL);
+(1,	'Message',	5,	1,	'You take a quick nap. You feel refreshed!',	NULL),
+(2,	'Message',	6,	3,	'You open the curtains and take a look outside.',	NULL),
+(3,	'ChangeRoom',	5,	9,	NULL,	4),
+(4,	'ChangeRoom',	5,	8,	NULL,	1),
+(5,	'Message',	5,	9,	'You call the lift.',	NULL);
 
 -- 2022-01-24 10:44:14
