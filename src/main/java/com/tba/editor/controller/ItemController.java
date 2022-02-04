@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
@@ -91,7 +92,7 @@ public class ItemController
      * @return Une redirection vers la page de détails du nouveau lieu
      */
     @PostMapping("/create")
-    public RedirectView create(@RequestParam String name, @RequestParam(defaultValue = "0") boolean visible, @RequestParam int roomId)
+    public RedirectView create(RedirectAttributes attributes, @RequestParam String name, @RequestParam(defaultValue = "0") boolean visible, @RequestParam int roomId)
     {
         // Récupère l'élément demandé en base de données
         Room room = roomRepository.findById(roomId).orElseThrow(
@@ -105,6 +106,8 @@ public class ItemController
         item.setRoom(room);
         // Sauvegarde le nouveau élément interactif en base de données
         Item savedItem = repository.save(item);
+        // Ajoute un message éphémère à afficher sur la prochaine page
+        attributes.addFlashAttribute("message", "New item succesfully created!");
         // Redirige vers la page de détails du nouveau lieu
         return new RedirectView("/items/" + savedItem.getId());
     }
@@ -139,7 +142,7 @@ public class ItemController
      * @return Une redirection vers la page de détails du lieu modifié
      */
     @PostMapping("/{id}/update")
-    public RedirectView update(@PathVariable int id, @RequestParam String name, @RequestParam(defaultValue = "0") boolean visible, @RequestParam int roomId)
+    public RedirectView update(RedirectAttributes attributes, @PathVariable int id, @RequestParam String name, @RequestParam(defaultValue = "0") boolean visible, @RequestParam int roomId)
     {
         // Récupère l'élément demandé en base de données
         Item item = repository.findById(id).orElseThrow(
@@ -157,12 +160,14 @@ public class ItemController
         item.setRoom(room);
         // Sauvegarde le nouvel élément interactif en base de données
         repository.save(item);
+        // Ajoute un message éphémère à afficher sur la prochaine page
+        attributes.addFlashAttribute("message", "Item succesfully updated!");
         // Redirige vers la page de détails du nouveau lieu
         return new RedirectView("/items/" + id);
     }
 
     @PostMapping("/{id}/delete")
-    public RedirectView delete(@PathVariable int id)
+    public RedirectView delete(RedirectAttributes attributes, @PathVariable int id)
     {
         // Récupère l'élément demandé en base de données
         Item item = repository.findById(id).orElseThrow(
@@ -171,6 +176,8 @@ public class ItemController
         );
         // Supprime l'élément de la base de données
         repository.delete(item);
+        // Ajoute un message éphémère à afficher sur la prochaine page
+        attributes.addFlashAttribute("message", "Item succesfully deleted!");
         // Redirige vers la page listant tous les éléments existants
         return new RedirectView("/items");
     }

@@ -5,6 +5,8 @@
 </head>
 <body>
     <div class="container">
+        <div th:insert="fragments/general.html :: flash"></div>
+
         <h1 class="mb-4">Item #<span th:text="${item.id}"></span></h1>
 
         <ul class="list-group mb-3">

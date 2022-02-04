@@ -5,7 +5,8 @@
 </head>
 <body>
     <div class="container">
-    
+        <div th:insert="fragments/general.html :: flash"></div>
+
         <h1 th:if="${item.id == 0}" class="mb-4">Create new item</h1>
         <h1 th:unless="${item.id == 0}" class="mb-4">Update item #<span th:text="${item.id}"></span></h1>
 
