@@ -35,3 +35,27 @@ Dans une classe `ItemController`, implémenter les méthodes permettant d'obteni
 ### BONUS
 
 - La page permettant d'afficher les détails d'un lieu doit également afficher la liste des éléments interactifs qui s'y trouvent, et permettre d'accéder directement à chaque élément de manière individuelle.
+
+## Mission 2 - Gérer les passages entre les lieux
+
+<!-- TODO -->
+
+## Mission 3 - Gérer les commandes
+
+Implémenter les routes permettant de lire, créer, modifier et supprimer des commandes, en prêtant attention aux points suivants:
+
+- Toutes les commandes doivent être affichées sur une même page, indépendamment de leur type, **mais** le type de chaque commande doit apparaître sur la page. Le type de chaque commande doit également apparaître dans sa page de détails.
+- On doit pouvoir choisir le type d'une commande au moment de sa création, **mais** on ne doit pas pouvoir le modifier par la suite (si l'on souhaite faire cela, alors il faudra supprimer la commande existante et la recréer).
+- Il faut trouver un moyen de faire en sorte que, lorsque l'utilisateur valide un formulaire de création de commande, une commande du bon type soit créée.
+- Il faut trouver un moyen de faire en sorte que l'utilisateur puisse avoir accès à un formulaire particulier pour les commandes interactives (**ItemCommand**) qui ont une propriété particulière inexistante pour les autres types.
+
+<details>
+<summary>INDICE</summary>
+
+[Afficher le nom d'une classe avec Thymeleaf](https://stackoverflow.com/questions/58052326/how-to-get-an-entity-class-name-with-thymeleaf-spring-mvc-in-html-page)
+</details>
+
+### BONUS
+
+- Si l'utilisateur rentre un nom de commande déjà existant lors de la création ou de la modification d'une commande, il doit être redirigé sur la formulaire avec un message d'erreur explicite (au lieu d'avoir une page erreur 500).
+- La liste des toutes les commandes doit faire apparaître le message par défaut des commandes interactives (**ItemCommand**).
