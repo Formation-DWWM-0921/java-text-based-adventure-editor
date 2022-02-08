@@ -59,3 +59,49 @@ Implémenter les routes permettant de lire, créer, modifier et supprimer des co
 
 - Si l'utilisateur rentre un nom de commande déjà existant lors de la création ou de la modification d'une commande, il doit être redirigé sur la formulaire avec un message d'erreur explicite (au lieu d'avoir une page erreur 500).
 - La liste des toutes les commandes doit faire apparaître le message par défaut des commandes interactives (**ItemCommand**).
+
+## Mission 4 - Gérer les effets
+
+Implémenter les routes permettant de lire, créer, modifier et supprimer des effets, en prêtant attention aux points suivants:
+
+- Chaque page d'élément interactif (**Item**) doit afficher, pour chaque commande, la liste des effets qui lui sont associés.
+
+<details>
+<summary>EXEMPLE</summary>
+
+# Item #8
+
+- **Name:** lift
+- **Room:** [bedroom]()
+- **Visible:** Yes
+
+## Effects
+
+### On command "use"
+
+| # | Type | Arguments | Edit | Delete |
+|---|---|---|---|---|
+| 5 | Message | "You call the lift." | [Edit]() | [Delete]() |
+| 6 | Change Room | [attic]() | [Edit]() | [Delete]() |
+
+### On command "open"
+
+> No programmed effects.
+
+### On command "talk to"
+
+> No programmed effects.
+
+### On command "pick up"
+
+> No programmed effects.
+
+</details>
+
+- Chaque section correspondant à une commande, et indiquant la liste des effets lorsque cette commande est utilisée sur l'élément interactif, doit contenir un bouton "créer un nouvel effet" qui amène sur un formulaire permettant de rentrer les détails de l'effet (par exemple, pour un **MessageEffect**, le message à afficher).
+- L'ordre d'exécution des effets doit toujours rester cohérent (lorsqu'un nouvel effet est créé, il doit avoir une nouvelle valeur d'ordre, lorsqu'un effet est supprimé, il faut réordonner les autres effets).
+
+### BONUS
+
+- Lors de l'ajout d'un nouvel effet, l'élément interactif et la commande concernés ne doivent **pas** être sélectionnables manuellement. Ils doivent être déterminés automatiquement en fonction de la page d'origine.
+- Il doit être possible de changer l'ordre d'exécution des effets. L'ordre d'exécution doit toujours rester cohérent.
