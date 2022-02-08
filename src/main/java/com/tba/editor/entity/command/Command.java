@@ -59,4 +59,23 @@ public abstract class Command
     {
         return name;
     }
+
+    /**
+     * Modifie le nom de la commande
+     * @param name Le nouveau nom
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * @return L'identifiant du type de commande à insérer dans les URI
+     */
+    abstract public String getTag();
+
+    /**
+     * @return La description du but de la commande
+     */
+    abstract public String getPurposeDescription();
 }

@@ -22,4 +22,22 @@ public class DirectionCommand extends Command
     @OneToMany
     @JoinColumn(name = "direction_id")
     private List<RoomConnection> connections;
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getTag()
+    {
+        return "direction";
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getPurposeDescription()
+    {
+        return "Move between rooms";
+    }
 }

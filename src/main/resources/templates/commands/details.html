@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/general.html :: head">
+    <title>Text-based adventure game editor - Command details</title>
+</head>
+<body>
+    <div class="container">
+        <div th:insert="fragments/general.html :: flash"></div>
+
+        <h1 class="mb-4">Command #<span th:text="${command.id}"></span></h1>
+
+        <ul class="list-group mb-3">
+            <li class="list-group-item">
+                <strong>Name:</strong> <span th:text="${command.name}"></span>
+            </li>
+            <li class="list-group-item">
+                <strong>Purpose:</strong> <span th:text="${command.purposeDescription}"></span>
+            </li>
+            <li th:if="${command.class.simpleName == 'ItemCommand'}" class="list-group-item">
+                <strong>Default message:</strong> "<span th:text="${command.defaultMessage}"></span>"
+            </li>
+        </ul>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-primary" th:href="@{/commands/{tag}/{id}/update(id=${command.id},tag=${command.tag})}">Edit</a>
+
+            <form th:action="@{/commands/{id}/delete(id=${command.id})}" method="post">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+
+            <a class="btn btn-secondary" href="/commands">Back to list</a>
+        </div>
+    </div>
+</body>
+</html>

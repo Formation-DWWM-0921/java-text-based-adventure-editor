@@ -67,10 +67,38 @@ public class ItemCommand extends Command
     }
 
     /**
+     * Modifie le message par défaut de la commande
+     * @param message Le nouveau message
+     */
+    public void setDefaultMessage(String message)
+    {
+        this.defaultMessage = message;
+    }
+
+    /**
      * @return Le nom de l'élément interactif sur lequel la commande doit actuellement agir
      */
     public String getCurrentItemName()
     {
         return currentItemName;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getTag()
+    {
+        return "item";
+    }
+
+    
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public String getPurposeDescription()
+    {
+        return "Interact with items";
     }
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/general.html :: head">
+    <title>Text-based adventure game editor - All commands</title>
+</head>
+<body>
+    <div class="container">
+        <div th:insert="fragments/general.html :: flash"></div>
+
+        <h1 class="mb-4">All commands</h1>
+
+        <table class="table table-striped table-hover mb-3">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="command : ${commands}">
+                    <th scope="row" th:text="${command.id}"></th>
+                    <td>
+                        <a th:href="@{/commands/{id}(id=${command.id})}" th:text="${command.name}"></a>
+                    </td>
+                    <td th:text="${command.purposeDescription}"></td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" th:href="@{/commands/{tag}/{id}/update(id=${command.id},tag=${command.tag})}">Edit</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/commands/{id}/delete(id=${command.id})}" method="post">
+                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                        </form>            
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="/commands/create">
+            <div class="mb-3">
+                <label class="form-label" for="tag">Select the purpose of the new command:</label>
+                <select class="form-select" name="tag">
+                    <option th:each="command : ${commandPrototypes}" th:value="${command.tag}" th:text="${command.purposeDescription}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Create new command</a>
+        </form>
+    </div>
+</body>
+</html>

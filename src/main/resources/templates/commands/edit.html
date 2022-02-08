@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="fragments/general.html :: head">
+    <title>Text-based adventure game editor - Edit command</title>
+</head>
+<body>
+    <div class="container">
+        <div th:insert="fragments/general.html :: flash"></div>
+
+        <h1 th:if="${command.id == 0}" class="mb-4">Create new command</h1>
+        <h1 th:unless="${command.id == 0}" class="mb-4">Update command #<span th:text="${command.id}"></span></h1>
+
+        <form class="mb-3" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" th:value="${command.name}" />
+            </div>
+
+            <div th:if="${command.class.simpleName == 'ItemCommand'}" class="mb-3">
+                <label for="defaultMessage" class="form-label">Default message</label>
+                <input type="text" class="form-control" name="defaultMessage" th:value="${command.defaultMessage}" />
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a th:if="${command.id == 0}" class="btn btn-secondary" href="/commands">Back to list</a>
+                <a th:unless="${command.id == 0}" class="btn btn-secondary" th:href="@{/commands/{id}(id=${command.id})}">Back to details</a>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
