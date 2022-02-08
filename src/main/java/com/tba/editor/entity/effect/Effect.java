@@ -43,6 +43,11 @@ public abstract class Effect
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
+    /**
+     * L'ordre d'exécution de cet effet parmi tous les effets associés au même élément interactif et à la même commande
+     */
+    @Column(name = "_order")
+    private int order;
 
     /**
      * @return L'identifiant en base de données

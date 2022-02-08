@@ -133,9 +133,11 @@ CREATE TABLE `effect` (
   `dtype` varchar(255) NOT NULL,
   `command_id` int(10) unsigned NOT NULL,
   `item_id` int(10) unsigned NOT NULL,
+  `_order` int(10) unsigned NOT NULL,
   `message` varchar(255) DEFAULT NULL,
   `target_room_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `command_id_item_id__order` (`command_id`,`item_id`,`_order`),
   KEY `command_id` (`command_id`),
   KEY `item_id` (`item_id`),
   KEY `target_room_id` (`target_room_id`),
@@ -144,11 +146,11 @@ CREATE TABLE `effect` (
   CONSTRAINT `effect_ibfk_3` FOREIGN KEY (`target_room_id`) REFERENCES `room` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `effect` (`id`, `dtype`, `command_id`, `item_id`, `message`, `target_room_id`) VALUES
-(1,	'Message',	5,	1,	'You take a quick nap. You feel refreshed!',	NULL),
-(2,	'Message',	6,	3,	'You open the curtains and take a look outside.',	NULL),
-(3,	'ChangeRoom',	5,	9,	NULL,	4),
-(4,	'ChangeRoom',	5,	8,	NULL,	1),
-(5,	'Message',	5,	9,	'You call the lift.',	NULL);
+INSERT INTO `effect` (`id`, `dtype`, `command_id`, `item_id`, `_order`, `message`, `target_room_id`) VALUES
+(1,	'Message',	5,	1,	1,	'You take a quick nap. You feel refreshed!',	NULL),
+(2,	'Message',	6,	3,	1,	'You open the curtains and take a look outside.',	NULL),
+(3,	'ChangeRoom',	5,	9,	1,	NULL,	4),
+(4,	'ChangeRoom',	5,	8,	1,	NULL,	1),
+(5,	'Message',	5,	9,	2,	'You call the lift.',	NULL);
 
 -- 2022-01-24 10:44:14
